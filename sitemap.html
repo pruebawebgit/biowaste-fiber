@@ -41,9 +41,7 @@
     margin: 0;
   }
 
-  .tree > ul {
-    padding-top: 0;
-  }
+  .tree > ul { padding-top: 0; }
 
   .tree li {
     display: flex;
@@ -81,6 +79,12 @@
   .sub-pink li::after          { border-top-color: #f15f79; }
   .sub-pink li::after          { border-left-color: #f15f79; }
   .sub-pink li:last-child::before { border-right-color: #f15f79; }
+
+  /* --- Subárbol Proyectos destacados en turquesa --- */
+  .sub-teal li::before,
+  .sub-teal li::after          { border-top-color: #4dd0e1; }
+  .sub-teal li::after          { border-left-color: #4dd0e1; }
+  .sub-teal li:last-child::before { border-right-color: #4dd0e1; }
 
   /* ==================== NODOS ==================== */
   .node {
@@ -153,7 +157,7 @@
     font-size: 0.85rem;
   }
 
-  /* --- Nivel 3 --- */
+  /* --- Nivel 3 · Rosa (GreenDamas) --- */
   .node.n3 {
     background: linear-gradient(160deg, #b24592, #7a2f62);
     border: 1.5px solid #f15f79;
@@ -164,9 +168,57 @@
   }
   .node.n3::before { border-top-color: #f15f79; }
 
+  /* --- Nivel 2 · Áreas de trabajo (verde) --- */
+  .node.areas {
+    background: linear-gradient(160deg, #1f8a5b, #0f5c3b);
+    border: 2px solid #7CFC9E;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+
+  /* --- Nivel 3 · Áreas temáticas (verde oscuro) --- */
+  .node.n3v {
+    background: linear-gradient(160deg, #0e7a4a, #063d24);
+    border: 1.5px solid #7CFC9E;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  /* --- Nivel 2 · Proyectos destacados (turquesa) --- */
+  .node.destacados {
+    background: linear-gradient(160deg, #26a69a, #00695c);
+    border: 2px solid #4dd0e1;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+
+  /* --- Nivel 3 · Proyectos destacados (turquesa oscuro) --- */
+  .node.n3t {
+    background: linear-gradient(160deg, #00796b, #004d40);
+    border: 1.5px solid #4dd0e1;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .node.n3t::before { border-top-color: #4dd0e1; }
+
+  /* --- Nivel 2 · CTA (ámbar) --- */
+  .node.cta {
+    background: linear-gradient(160deg, #ffb347, #e08e0b);
+    border: 2px solid #ffd580;
+    color: #2a1a00;
+    font-weight: 800;
+    font-size: 0.8rem;
+  }
+
   /* ==================== LEYENDA ==================== */
   .leyenda {
-    max-width: 920px;
+    max-width: 1000px;
     margin: 90px auto 0;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(124,252,158,0.35);
@@ -204,11 +256,16 @@
     flex-shrink: 0;
   }
 
-  .sw-root { background: linear-gradient(135deg, #00c853, #00e676); border: 2px solid #007a3d; }
-  .sw-n1   { background: linear-gradient(160deg, #2a5298, #1e3c72); border: 1.5px solid #7CFC9E; }
-  .sw-n2   { background: linear-gradient(160deg, #1e3c72, #16305e); border: 1.5px solid rgba(124,252,158,0.75); }
-  .sw-des  { background: linear-gradient(160deg, #f15f79, #b24592); border: 1.5px solid #b24592; }
-  .sw-n3   { background: linear-gradient(160deg, #b24592, #7a2f62); border: 1.5px solid #f15f79; }
+  .sw-root   { background: linear-gradient(135deg, #00c853, #00e676); border: 2px solid #007a3d; }
+  .sw-n1     { background: linear-gradient(160deg, #2a5298, #1e3c72); border: 1.5px solid #7CFC9E; }
+  .sw-n2     { background: linear-gradient(160deg, #1e3c72, #16305e); border: 1.5px solid rgba(124,252,158,0.75); }
+  .sw-areas  { background: linear-gradient(160deg, #1f8a5b, #0f5c3b); border: 1.5px solid #7CFC9E; }
+  .sw-n3v    { background: linear-gradient(160deg, #0e7a4a, #063d24); border: 1.5px solid #7CFC9E; }
+  .sw-dest   { background: linear-gradient(160deg, #26a69a, #00695c); border: 1.5px solid #4dd0e1; }
+  .sw-n3t    { background: linear-gradient(160deg, #00796b, #004d40); border: 1.5px solid #4dd0e1; }
+  .sw-cta    { background: linear-gradient(160deg, #ffb347, #e08e0b); border: 1.5px solid #ffd580; }
+  .sw-des    { background: linear-gradient(160deg, #f15f79, #b24592); border: 1.5px solid #b24592; }
+  .sw-n3     { background: linear-gradient(160deg, #b24592, #7a2f62); border: 1.5px solid #f15f79; }
 </style>
 </head>
 <body>
@@ -221,10 +278,44 @@
         <div class="node root">BIOWASTE FIBER</div>
         <ul>
 
+          <!-- ============ INICIO ============ -->
           <li>
             <div class="node n1">INICIO</div>
+            <ul>
+              <li><div class="node n2">Portada</div></li>
+
+              <!-- Áreas de trabajo -->
+              <li>
+                <div class="node areas">Áreas de trabajo</div>
+                <ul>
+                  <li><div class="node n3v">Empresas</div></li>
+                  <li><div class="node n3v">Formación</div></li>
+                  <li><div class="node n3v">Soluciones y productos</div></li>
+                  <li><div class="node n3v">Innovación</div></li>
+                </ul>
+              </li>
+
+              <!-- Proyectos destacados -->
+              <li>
+                <div class="node destacados">Proyectos destacados</div>
+                <ul class="sub-teal">
+                  <li><div class="node n3t">Smart Bug</div></li>
+                  <li><div class="node n3t">Biomateriales</div></li>
+                  <li><div class="node n3t">Agricultura regenerativa</div></li>
+                  <li><div class="node n3t">Mi Viernes Sostenible</div></li>
+                </ul>
+              </li>
+
+              <!-- CTA -->
+              <li>
+                <div class="node cta">Llamada a la acción<br>
+                  <span style="font-size:.7rem;font-weight:500;">(Hablemos de economía circular)</span>
+                </div>
+              </li>
+            </ul>
           </li>
 
+          <!-- ============ EMPRESAS ============ -->
           <li>
             <div class="node n1">EMPRESAS</div>
             <ul>
@@ -234,6 +325,7 @@
             </ul>
           </li>
 
+          <!-- ============ FORMACIÓN ============ -->
           <li>
             <div class="node n1">FORMACIÓN</div>
             <ul>
@@ -243,6 +335,7 @@
             </ul>
           </li>
 
+          <!-- ============ SOLUCIONES ============ -->
           <li>
             <div class="node n1">SOLUCIONES</div>
             <ul>
@@ -257,6 +350,7 @@
             </ul>
           </li>
 
+          <!-- ============ PROYECTOS ============ -->
           <li>
             <div class="node n1">PROYECTOS</div>
             <ul>
@@ -267,10 +361,12 @@
             </ul>
           </li>
 
+          <!-- ============ NOSOTROS ============ -->
           <li>
             <div class="node n1">NOSOTROS</div>
           </li>
 
+          <!-- ============ CONTACTO ============ -->
           <li>
             <div class="node n1">CONTACTO</div>
           </li>
@@ -286,6 +382,11 @@
       <li><span class="swatch sw-root"></span> Nivel 0 · Marca raíz</li>
       <li><span class="swatch sw-n1"></span> Nivel 1 · Sección principal</li>
       <li><span class="swatch sw-n2"></span> Nivel 2 · Subsección</li>
+      <li><span class="swatch sw-areas"></span> Nivel 2 · Áreas de trabajo</li>
+      <li><span class="swatch sw-n3v"></span> Nivel 3 · Áreas temáticas</li>
+      <li><span class="swatch sw-dest"></span> Nivel 2 · Proyectos destacados</li>
+      <li><span class="swatch sw-n3t"></span> Nivel 3 · Proyectos destacados</li>
+      <li><span class="swatch sw-cta"></span> Nivel 2 · Llamada a la acción (CTA)</li>
       <li><span class="swatch sw-des"></span> Nivel 2 · Con subnivel (GreenDamas)</li>
       <li><span class="swatch sw-n3"></span> Nivel 3 · Subsección de GreenDamas</li>
     </ul>
