@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap · BIOWASTE FIBER</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    color: #fff;
+    padding: 50px 30px 80px;
+    overflow-x: auto;
+  }
+
+  h1 {
+    text-align: center;
+    color: #7CFC9E;
+    letter-spacing: 5px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 60px;
+    text-shadow: 0 0 20px rgba(124,252,158,0.55);
+  }
+
+  /* ==================== ÁRBOL ==================== */
+  .tree {
+    display: flex;
+    justify-content: center;
+    min-width: max-content;
+  }
+
+  .tree ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 0 0;
+    margin: 0;
+  }
+
+  .tree > ul {
+    padding-top: 0;
+  }
+
+  .tree li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 50px 12px 0;
+  }
+
+  /* Conectores (línea horizontal + vertical) */
+  .tree li::before,
+  .tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 50px;
+    border-top: 2px solid #7CFC9E;
+  }
+
+  .tree li::before { right: 50%; }
+  .tree li::after  { left: 50%; border-left: 2px solid #7CFC9E; }
+
+  /* Casos extremos */
+  .tree li:first-child::before { border: 0 none; }
+  .tree li:last-child::after   { border: 0 none; }
+  .tree li:last-child::before  { border-right: 2px solid #7CFC9E; }
+
+  .tree li:only-child::before,
+  .tree li:only-child::after   { display: none; }
+  .tree li:only-child          { padding-top: 0; }
+
+  /* --- Subárbol GreenDamas en rosa --- */
+  .sub-pink li::before,
+  .sub-pink li::after          { border-top-color: #f15f79; }
+  .sub-pink li::after          { border-left-color: #f15f79; }
+  .sub-pink li:last-child::before { border-right-color: #f15f79; }
+
+  /* ==================== NODOS ==================== */
+  .node {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    position: relative;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 18px rgba(124,252,158,0.55);
+  }
+
+  /* Flecha hacia abajo encima de cada nodo */
+  .node::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #7CFC9E;
+  }
+
+  /* --- Nivel 0 · Raíz --- */
+  .node.root {
+    background: linear-gradient(135deg, #00c853, #00e676);
+    color: #00230f;
+    border: 3px solid #007a3d;
+    padding: 16px 40px;
+    font-size: 1.05rem;
+    letter-spacing: 3px;
+    font-weight: 800;
+  }
+  .node.root::before { display: none; }
+
+  /* --- Nivel 1 --- */
+  .node.n1 {
+    background: linear-gradient(160deg, #2a5298, #1e3c72);
+    border: 2px solid #7CFC9E;
+    color: #ffffff;
+  }
+
+  /* --- Nivel 2 --- */
+  .node.n2 {
+    background: linear-gradient(160deg, #1e3c72, #16305e);
+    border: 1.5px solid rgba(124,252,158,0.75);
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+  }
+
+  /* --- Nivel 2 · Destacado (GreenDamas) --- */
+  .node.destacado {
+    background: linear-gradient(160deg, #f15f79, #b24592);
+    border: 2.5px solid #b24592;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+
+  /* --- Nivel 3 --- */
+  .node.n3 {
+    background: linear-gradient(160deg, #b24592, #7a2f62);
+    border: 1.5px solid #f15f79;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .node.n3::before { border-top-color: #f15f79; }
+
+  /* ==================== LEYENDA ==================== */
+  .leyenda {
+    max-width: 920px;
+    margin: 90px auto 0;
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(124,252,158,0.35);
+    border-radius: 14px;
+    padding: 26px 32px;
+  }
+
+  .leyenda h2 {
+    color: #7CFC9E;
+    letter-spacing: 4px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .leyenda ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+  }
+
+  .leyenda li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: #dfe9e4;
+  }
+
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    flex-shrink: 0;
+  }
+
+  .sw-root { background: linear-gradient(135deg, #00c853, #00e676); border: 2px solid #007a3d; }
+  .sw-n1   { background: linear-gradient(160deg, #2a5298, #1e3c72); border: 1.5px solid #7CFC9E; }
+  .sw-n2   { background: linear-gradient(160deg, #1e3c72, #16305e); border: 1.5px solid rgba(124,252,158,0.75); }
+  .sw-des  { background: linear-gradient(160deg, #f15f79, #b24592); border: 1.5px solid #b24592; }
+  .sw-n3   { background: linear-gradient(160deg, #b24592, #7a2f62); border: 1.5px solid #f15f79; }
+</style>
+</head>
+<body>
+
+  <h1>BIOWASTE FIBER · SITEMAP</h1>
+
+  <div class="tree">
+    <ul>
+      <li>
+        <div class="node root">BIOWASTE FIBER</div>
+        <ul>
+
+          <li>
+            <div class="node n1">INICIO</div>
+          </li>
+
+          <li>
+            <div class="node n1">EMPRESAS</div>
+            <ul>
+              <li><div class="node n2">Consultoría</div></li>
+              <li><div class="node n2">Gestión y valorización</div></li>
+              <li><div class="node n2">Trazabilidad</div></li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node n1">FORMACIÓN</div>
+            <ul>
+              <li><div class="node n2">Cursos</div></li>
+              <li><div class="node n2">Talleres</div></li>
+              <li><div class="node n2">Teambuilding</div></li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node n1">SOLUCIONES</div>
+            <ul>
+              <li><div class="node n2">Smart Bug</div></li>
+              <li>
+                <div class="node destacado">GreenDamas</div>
+                <ul class="sub-pink">
+                  <li><div class="node n3">Kokedamas</div></li>
+                  <li><div class="node n3">Bases de kokedamas</div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node n1">PROYECTOS</div>
+            <ul>
+              <li><div class="node n2">Biomateriales</div></li>
+              <li><div class="node n2">Mi Viernes Sostenible</div></li>
+              <li><div class="node n2">Agricultura regenerativa</div></li>
+              <li><div class="node n2">Investigación e innovación</div></li>
+            </ul>
+          </li>
+
+          <li>
+            <div class="node n1">NOSOTROS</div>
+          </li>
+
+          <li>
+            <div class="node n1">CONTACTO</div>
+          </li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="leyenda">
+    <h2>LEYENDA</h2>
+    <ul>
+      <li><span class="swatch sw-root"></span> Nivel 0 · Marca raíz</li>
+      <li><span class="swatch sw-n1"></span> Nivel 1 · Sección principal</li>
+      <li><span class="swatch sw-n2"></span> Nivel 2 · Subsección</li>
+      <li><span class="swatch sw-des"></span> Nivel 2 · Con subnivel (GreenDamas)</li>
+      <li><span class="swatch sw-n3"></span> Nivel 3 · Subsección de GreenDamas</li>
+    </ul>
+  </div>
+
+</body>
+</html>
